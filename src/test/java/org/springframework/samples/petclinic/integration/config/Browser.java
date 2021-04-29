@@ -17,8 +17,8 @@ public class Browser {
 		Configuration.pageLoadStrategy = "eager";
 		Configuration.timeout = 120000;
 		Configuration.reportsFolder = "screenshots/";
-		Configuration.holdBrowserOpen = true;
-//        Configuration.startMaximized = true;
+//		Configuration.holdBrowserOpen = true;
+//      Configuration.startMaximized = true;
 	}
 
 	private static DesiredCapabilities getBrowserCapabilities() {
