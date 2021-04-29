@@ -6,9 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.samples.petclinic.integration.utils.LocatorParser.*;
 import static org.springframework.samples.petclinic.integration.utils.SelenideTools.openUrl;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import io.cucumber.java.en.Given;
@@ -32,10 +30,21 @@ public class OwnersSteps extends SpringIntegrationTest {
 		openUrl(Constants.BASE_URL + "/owners/find");
 	}
 
+	@Given("I go to the new-owner page")
+	public void newOwnerPage() {
+		openUrl(Constants.BASE_URL + "/owners/new");
+	}
+
 	@When("^I click on the link with title \"([^\"]*)\"$")
 	public void clickOnLinkWithTitle(String linkTitle) {
 		By elementSelector = By.xpath("//*[@title='%s']");
 		$(parseLocator(elementSelector, linkTitle)).shouldBe(Condition.visible).click();
+	}
+
+	@When("^I click the button with text \"([^\"]*)\"$")
+	public void clickOnButtonWithText(String buttonText) {
+		By elementSelector = By.xpath("//button[text()='%s']");
+		$(parseLocator(elementSelector, buttonText)).shouldBe(Condition.visible).click();
 	}
 
 	@When("^I fill the field named \"([^\"]*)\" with value \"([^\"]*)\"$")
@@ -80,5 +89,34 @@ public class OwnersSteps extends SpringIntegrationTest {
 
 		assertThat($(elementSelector).shouldBe(Condition.visible).isDisplayed());
 	}
+
+	/**
+	 * Owner Information
+	 */
+
+	@Then("^I should see owner with the name as \"([^\"]*)\"$")
+	public void shouldSeeOwnerWithProperty(String name) {
+		By elementSelector = By.xpath("//table/tbody/tr/th[text()='Name']/following-sibling::td/b");
+		String text = $(elementSelector).shouldBe(Condition.visible).text();
+
+		assertThat(text.equalsIgnoreCase(name));
+	}
+
+	@Then("^I should see owner with the \"([^\"]*)\" as \"([^\"]*)\"$")
+	public void shouldSeeOwnerWithProperty(String property, String value) {
+		By elementSelector = By.xpath("//table/tbody/tr/th[text()='%s']/following-sibling::td");
+		String text = $(parseLocator(elementSelector, property)).shouldBe(Condition.visible).text();
+
+		assertThat(text.equalsIgnoreCase(value));
+	}
+
+	@Then("^I should see \"([^\"]*)\" field with \"([^\"]*)\" alert$")
+	public void shouldSeeFieldWithAlert(String fieldName, String alertText) {
+		By elementSelector = By.xpath("//input[@id='%s']/parent::div/following-sibling::span[2]");
+		String text = $(parseLocator(elementSelector, fieldName)).shouldBe(Condition.visible).text();
+
+		assertThat(text.equalsIgnoreCase(alertText));
+	}
+
 
 }
