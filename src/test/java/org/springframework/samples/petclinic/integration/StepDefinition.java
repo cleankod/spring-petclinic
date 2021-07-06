@@ -57,4 +57,45 @@ public class StepDefinition extends SpringIntegrationTest {
 		webElement.submit();
 	}
 
+	@Given("I go to the new-owner page")
+	public void iGoToTheNewOwnerPage() {
+		webDriver.navigate().to(BASE_URL + "/owners/new");
+	}
+
+	@Then("I should see all owners")
+	public void iShouldSeeAllOwners() {
+		Assert.assertTrue(webDriver.findElement(By.xpath("//table[@id='owners']")).isDisplayed());
+	}
+
+	@Then("I should see {string}")
+	public void iShouldSee(String text) {
+		Assert.assertSame(webDriver.findElement(By.xpath("//*[@class='help-inline']/div")).getText(), text);
+	}
+
+	@Then("I should see all owners who starts the same letters {string}")
+	public void iShouldSeeAllOwnersWhoStartsTheSameLetters(String letter) {
+		List<WebElement> owners = webDriver.findElements(By.xpath("//td/a[contains(@href,'owners')]"));
+		for (WebElement element : owners) {
+			Assert.assertTrue(element.getText().contains(letter));
+		}
+	}
+
+	@And("I click on the first link")
+	public void iClickOnTheFirstLink() {
+		webDriver.findElement(By.xpath("//td/a[contains(@href,'owners')]")).click();
+	}
+
+	@And("I should see the {string} under all field without telephone")
+	public void iShouldSeeTheUnderAllFieldWithoutTelephone(String text) {
+		List<WebElement> helpInside = webDriver.findElements(By.xpath("//span[@class='help-inline']"));
+		for (int i = 0; i < helpInside.size() - 1; i++) {
+			Assert.assertSame(helpInside.get(i).getText(), text);
+		}
+	}
+
+	@And("I should see the {string} under telephone field")
+	public void iShouldSeeTheUnderTelephoneField(String text) {
+		List<WebElement> helpInside = webDriver.findElements(By.xpath("//span[@class='help-inline']"));
+		Assert.assertSame(helpInside.get(5).getText(), text);
+	}
 }
