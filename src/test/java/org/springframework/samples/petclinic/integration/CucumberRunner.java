@@ -9,5 +9,10 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report" },
 		glue = { "org.springframework.samples.petclinic.integration" }, features = "classpath:scenarios")
 public class CucumberRunner {
+public final static WebDriver webDriver = Browser.webDriver;
 
+	@After
+	public void quit() {
+		webDriver.quit();
+	}
 }
