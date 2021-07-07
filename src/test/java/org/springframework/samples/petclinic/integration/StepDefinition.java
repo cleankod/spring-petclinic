@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.integration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import io.cucumber.java.en.And;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.List;
 
 public class StepDefinition extends SpringIntegrationTest {
 
@@ -67,9 +71,9 @@ public class StepDefinition extends SpringIntegrationTest {
 		Assert.assertTrue(webDriver.findElement(By.xpath("//table[@id='owners']")).isDisplayed());
 	}
 
-	@Then("I should see {string}")
-	public void iShouldSee(String text) {
-		Assert.assertSame(webDriver.findElement(By.xpath("//*[@class='help-inline']/div")).getText(), text);
+	@Then("I should see text {string}")
+	public void iShouldSeeText(String text) {
+		Assert.assertEquals(webDriver.findElement(By.xpath("//*[@class='help-inline']/div")).getText(),text);
 	}
 
 	@Then("I should see all owners who starts the same letters {string}")
@@ -89,13 +93,18 @@ public class StepDefinition extends SpringIntegrationTest {
 	public void iShouldSeeTheUnderAllFieldWithoutTelephone(String text) {
 		List<WebElement> helpInside = webDriver.findElements(By.xpath("//span[@class='help-inline']"));
 		for (int i = 0; i < helpInside.size() - 1; i++) {
-			Assert.assertSame(helpInside.get(i).getText(), text);
+			Assert.assertEquals(helpInside.get(i).getText(), text);
 		}
 	}
 
 	@And("I should see the {string} under telephone field")
 	public void iShouldSeeTheUnderTelephoneField(String text) {
 		List<WebElement> helpInside = webDriver.findElements(By.xpath("//span[@class='help-inline']"));
-		Assert.assertSame(helpInside.get(5).getText(), text);
+		Assert.assertTrue(helpInside.get(4).getText().contains(text));
+	}
+
+	@And("I click the button Add Owner")
+	public void iClickTheButtonAddOwner() {
+		webDriver.findElement(By.xpath("//button[@class='btn btn-default']")).click();
 	}
 }
