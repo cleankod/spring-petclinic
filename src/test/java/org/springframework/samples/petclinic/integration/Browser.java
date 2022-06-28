@@ -14,6 +14,10 @@ public class Browser {
 
 	public final static WebDriver webDriver = createDriver();
 
+	public static void browserClose() {
+		webDriver.close();
+	}
+
 	private static WebDriver createDriver() {
 		setupDriver();
 		ChromeDriver chromeDriver = new ChromeDriver(new ChromeDriverService.Builder().withSilent(true).build(),
