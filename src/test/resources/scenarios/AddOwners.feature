@@ -31,24 +31,24 @@ Feature: Add owners
     And I submit the form "add-owner-form"
     Then I should see field "firstName" with validation message:
       """
-      nie może być puste
+      must not be empty
       """
     And I should see field "lastName" with validation message:
       """
-      nie może być puste
+      must not be empty
       """
     And I should see field "address" with validation message:
       """
-      nie może być puste
+      must not be empty
       """
     And I should see field "city" with validation message:
       """
-      nie może być puste
+      must not be empty
       """
     And I should see field "telephone" with validation message:
       """
-      nie może być puste
-      wartość liczbowa spoza zakresu (oczekiwano <liczba cyfr: 10>,<liczba cyfr: 0>)
+      must not be empty
+      numeric value out of bounds (<10 digits>.<0 digits> expected)
       """
 
   Scenario: Add owner with no numbers in telephone field
@@ -61,7 +61,7 @@ Feature: Add owners
     And I submit the form "add-owner-form"
     Then I should see field "telephone" with validation message:
       """
-      wartość liczbowa spoza zakresu (oczekiwano <liczba cyfr: 10>,<liczba cyfr: 0>)
+      numeric value out of bounds (<10 digits>.<0 digits> expected)
       """
 
   Scenario: Add owner with 11 numbers in telephone field
@@ -74,7 +74,7 @@ Feature: Add owners
     And I submit the form "add-owner-form"
     Then I should see field "telephone" with validation message:
       """
-      wartość liczbowa spoza zakresu (oczekiwano <liczba cyfr: 10>,<liczba cyfr: 0>)
+      numeric value out of bounds (<10 digits>.<0 digits> expected)
       """
 
   Scenario: Add owner with 10 numbers in telephone field
