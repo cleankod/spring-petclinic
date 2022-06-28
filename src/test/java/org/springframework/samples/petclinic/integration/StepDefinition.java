@@ -68,7 +68,6 @@ public class StepDefinition extends SpringIntegrationTest {
 	public void shouldSeeAllOwners() {
 		By elementSelector = By.xpath("//table[@id='owners']/tbody/tr/td[1]/a");
 		List<WebElement> elements = webDriver.findElements(elementSelector);
-
 		assertThat(elements.size()).isGreaterThan(0);
 	}
 
@@ -83,7 +82,6 @@ public class StepDefinition extends SpringIntegrationTest {
 	public void shouldSeeMessageUnderField(String message, String fieldId) {
 		By elementSelector = By.xpath(String.format("//input[@id='%s']/parent::div/span", fieldId));
 		WebElement webElement = webDriver.findElement(elementSelector);
-
 		assertThat(webElement.getText()).isEqualTo(message);
 	}
 
@@ -91,7 +89,6 @@ public class StepDefinition extends SpringIntegrationTest {
 	public void shouldSeeValidationMessageUnderField(String fieldId, String message) {
 		By elementSelector = By.xpath(String.format("//input[@id='%s']/parent::div/following-sibling::span[2]", fieldId));
 		WebElement webElement = webDriver.findElement(elementSelector);
-
 		assertThat(webElement.getText()).isEqualTo(message);
 	}
 
