@@ -7,7 +7,7 @@ Feature: Add owners
     Then I should see the "Owner" page
     And I should see "add-owner-form" form
 
-  Scenario: Add owner
+  Scenario: Should add owner
     Given I go to the add-owner page
     When I fill the field named "firstName" with value "John"
     And I fill the field named "lastName" with value "Doe"
@@ -21,7 +21,7 @@ Feature: Add owners
     And I should see "City" with value "Doe City"
     And I should see "Telephone" with value "111222333"
 
-  Scenario: Add owner with every field empty
+  Scenario: Should not add owner with every field empty
     Given I go to the add-owner page
     When I fill the field named "firstName" with value ""
     And I fill the field named "lastName" with value ""
@@ -51,7 +51,7 @@ Feature: Add owners
       numeric value out of bounds (<10 digits>.<0 digits> expected)
       """
 
-  Scenario: Add owner with no numbers in telephone field
+  Scenario: Should not add owner with no numbers in telephone field
     Given I go to the add-owner page
     When I fill the field named "firstName" with value "John"
     And I fill the field named "lastName" with value "Doe"
@@ -64,7 +64,7 @@ Feature: Add owners
       numeric value out of bounds (<10 digits>.<0 digits> expected)
       """
 
-  Scenario: Add owner with 11 numbers in telephone field
+  Scenario: Should not add owner with 11 numbers in telephone field
     Given I go to the add-owner page
     When I fill the field named "firstName" with value "John"
     And I fill the field named "lastName" with value "Doe"
@@ -77,7 +77,7 @@ Feature: Add owners
       numeric value out of bounds (<10 digits>.<0 digits> expected)
       """
 
-  Scenario: Add owner with 10 numbers in telephone field
+  Scenario: Should add owner with 10 numbers in telephone field
     Given I go to the add-owner page
     When I fill the field named "firstName" with value "John"
     And I fill the field named "lastName" with value "Doe"
@@ -91,7 +91,7 @@ Feature: Add owners
     And I should see "City" with value "Doe City"
     And I should see "Telephone" with value "1234567890"
 
-  Scenario: Add owner with 30 characters in each field
+  Scenario: Should add owner with 30 characters in each field
     Given I go to the add-owner page
     When I fill the field named "firstName" with value "VeryLongNameVeryLongNameVeryLo"
     And I fill the field named "lastName" with value "VeryLongLastNameVeryLongLastNa"
