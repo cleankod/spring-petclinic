@@ -6,6 +6,7 @@ Feature: Find owners
     Then I should see the "Find Owners" page
 
   Scenario: Should find an owner
+    Given I go to the find-owners page
     When I fill the field named "lastName" with value "Franklin"
     And I submit the form "search-owner-form"
     Then I should see the "Owner Information" page
