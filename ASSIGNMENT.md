@@ -2,8 +2,9 @@
 
 ## How to start?
 1. Fork the project's repository.
-2. Follow the instructions in the [readme](readme.md) file.
-3. Create a pull request with your changes.
+2. Clone your fork.
+3. Make sure it runs on your machine (you can follow the instructions in the [readme](readme.md) file).
+4. Create a pull request with the asignment's solution (read the Assignment section below).
 
 ## Running tests
 You can run the Cucumber features from your IDE or via the command line:
